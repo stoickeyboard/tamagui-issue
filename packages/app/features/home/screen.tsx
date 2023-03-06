@@ -1,21 +1,35 @@
 import {
-  Adapt,
   Anchor,
   Button,
   H1,
-  Input,
-  LinearGradient,
+  Label,
   Paragraph,
-  Select,
   Separator,
   Sheet,
+  SizeTokens,
+  styled,
   Switch,
   XStack,
   YStack,
 } from '@my/ui'
-import { Check, ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
+import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import React, { useState } from 'react'
 import { useLink } from 'solito/link'
+
+function SwitchWithLabel(props: { size: SizeTokens }) {
+  const id = `switch-${props.size.toString().slice(1)}`
+  return (
+    <XStack w={200} ai="center" space="$4">
+      <Label pr="$0" miw={90} jc="flex-end" size={props.size} htmlFor={id}>
+        Dark mode
+      </Label>
+      <Separator mih={20} vertical />
+      <Switch id={id} size={'$10'}>
+        <Switch.Thumb animation="quick" />
+      </Switch>
+    </XStack>
+  )
+}
 
 export function HomeScreen() {
   const linkProps = useLink({
@@ -32,7 +46,6 @@ export function HomeScreen() {
           Here's a basic starter to show navigating from one screen to another. This screen uses the
           same code on Next.js and React Native.
         </Paragraph>
-
         <Separator />
         <Paragraph ta="center">
           Made by{' '}
@@ -48,67 +61,16 @@ export function HomeScreen() {
           >
             give it a ⭐️
           </Anchor>
-        </Paragraph>
-        <Select id="food" value="apple" onValueChange={setVal}>
-          <Select.Trigger w={180} iconAfter={ChevronDown}>
-            <Select.Value placeholder="Something" />
-          </Select.Trigger>
-
-          <Adapt when="sm" platform="touch">
-            <Sheet modal dismissOnSnapToBottom>
-              <Sheet.Frame>
-                <Sheet.ScrollView>
-                  <Adapt.Contents />
-                </Sheet.ScrollView>
-              </Sheet.Frame>
-              <Sheet.Overlay />
-            </Sheet>
-          </Adapt>
-
-          <Select.Content zIndex={200000}>
-            <Select.ScrollUpButton ai="center" jc="center" pos="relative" w="100%" h="$3">
-              <YStack zi={10}>
-                <ChevronUp size={20} />
-              </YStack>
-              <LinearGradient
-                start={[0, 0]}
-                end={[0, 1]}
-                fullscreen
-                colors={['$background', '$backgroundTransparent']}
-                br="$4"
-              />
-            </Select.ScrollUpButton>
-
-            <Select.Viewport minWidth={200}>
-              <Select.Group space="$-0">
-                <Select.Label>Fruits</Select.Label>
-                {items.map((item, i) => {
-                  return (
-                    <Select.Item index={i} key={item.name} value={item.name.toLowerCase()}>
-                      <Select.ItemText>{item.name}</Select.ItemText>
-                      <Select.ItemIndicator ml="auto">
-                        <Check size={16} />
-                      </Select.ItemIndicator>
-                    </Select.Item>
-                  )
-                })}
-              </Select.Group>
-            </Select.Viewport>
-
-            <Select.ScrollDownButton ai="center" jc="center" pos="relative" w="100%" h="$3">
-              <YStack zi={10}>
-                <ChevronDown size={20} />
-              </YStack>
-              <LinearGradient
-                start={[0, 0]}
-                end={[0, 1]}
-                fullscreen
-                colors={['$backgroundTransparent', '$background']}
-                br="$4"
-              />
-            </Select.ScrollDownButton>
-          </Select.Content>
-        </Select>
+        </Paragraph>{' '}
+        <YStack w={200} ai="center" space="$3">
+          <SwitchWithLabel size="$2" />
+          <SwitchWithLabel size="$3" />
+          <SwitchWithLabel size="$4" />
+          <SwitchWithLabel size="$5" />
+        </YStack>
+        <Button size="$4">Test 1</Button>
+        <Button size="$6">Test 2</Button>
+        <Button size="$10">Test 3</Button>
       </YStack>
 
       <XStack>
@@ -156,28 +118,3 @@ function SheetDemo() {
     </>
   )
 }
-
-const items = [
-  { name: 'Apple' },
-  { name: 'Pear' },
-  { name: 'Blackberry' },
-  { name: 'Peach' },
-  { name: 'Apricot' },
-  { name: 'Melon' },
-  { name: 'Honeydew' },
-  { name: 'Starfruit' },
-  { name: 'Blueberry' },
-  { name: 'Rasberry' },
-  { name: 'Strawberry' },
-  { name: 'Mango' },
-  { name: 'Pineapple' },
-  { name: 'Lime' },
-  { name: 'Lemon' },
-  { name: 'Coconut' },
-  { name: 'Guava' },
-  { name: 'Papaya' },
-  { name: 'Orange' },
-  { name: 'Grape' },
-  { name: 'Jackfruit' },
-  { name: 'Durian' },
-]
