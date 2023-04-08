@@ -14,6 +14,7 @@
     "@tamagui/lucide-icons": "^1.12.2",
     "@tamagui/shorthands": "^1.12.2",
     "@tamagui/themes": "^1.12.2",
+    "@tamagui/toast": "^1.12.2",
     "expo-constants": "^14.2.1",
     "expo-linking": "^3.2.3",
     "solito": "^3.0.0"
